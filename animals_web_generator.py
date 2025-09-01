@@ -1,5 +1,4 @@
 import json
-from tkinter.font import names
 
 
 def load_data(file_path):
@@ -10,25 +9,29 @@ def load_data(file_path):
 
 animals_data = load_data('animals_data.json')
 
-output = ""
-for info in animals_data:
-    output += '<li class="cards__item">'
-    output += f'<div class="card__title">{info["name"]}</div>'
-    output += '<p class="card__text">'
-    output += f"<strong>Diet:</strong> {info['characteristics']['diet']}<br/>\n"
-    output += f"<strong>Location:</strong> {info['locations'][0]}<br/>\n"
-    if info["characteristics"].get("type"):
-        output += f"<strong>Type:</strong> {info['characteristics'].get('type')}<br/>\n"
-    output += "</p>\n"
-    output += "</li>\n"
+def serialize_animal(animal_info):
+        output = ""
+        output += '<li class="cards__item">'
+        output += f'<div class="card__title">{animal_info["name"]}</div>'
+        output += '<p class="card__text">'
+        output += f"<strong>Diet:</strong> {animal_info['characteristics']['diet']}<br/>\n"
+        output += f"<strong>Location:</strong> {animal_info['locations'][0]}<br/>\n"
+        if animal_info["characteristics"].get("type"):
+            output += f"<strong>Type:</strong> {animal_info['characteristics'].get('type')}<br/>\n"
+        output += "</p>\n"
+        output += "</li>\n"
+        return output
 
-#print(output)
+output = ""
+for animal_info in animals_data:
+    output += serialize_animal(animal_info)
+
+
 
 
 with open("animals_template.html", "r") as file:
     template_html = file.read()
 
-#print(template_html)
 
 final_html = template_html.replace("__REPLACE_ANIMALS_INFO__", output)
 
