@@ -12,12 +12,15 @@ animals_data = load_data('animals_data.json')
 
 output = ""
 for info in animals_data:
-    output += (f"Name: {info["name"]}\n")
-    output += (f"Diet: {info["characteristics"]["diet"]}\n")
-    output += (f"Location: {info["locations"][0]}\n")
+    output += '<li class="cards__item">'
+    output += f'<div class="card__title">{info["name"]}</div>'
+    output += '<p class="card__text">'
+    output += f"<strong>Diet:</strong> {info['characteristics']['diet']}<br/>\n"
+    output += f"<strong>Location:</strong> {info['locations'][0]}<br/>\n"
     if info["characteristics"].get("type"):
-        output += (f"Type: {info["characteristics"].get("type", "")}\n")
-    output += "\n"
+        output += f"<strong>Type:</strong> {info['characteristics'].get('type')}<br/>\n"
+    output += "</p>\n"
+    output += "</li>\n"
 
 #print(output)
 
