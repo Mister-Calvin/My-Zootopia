@@ -14,12 +14,12 @@ def serialize_animal(animal_info):
     """Return an HTML <li> card for a single animal"""
     output = ""
     output += '<li class="cards__item">'
-    output += f'<div class="card__title">{animal_info.get("name")}</div>'
+    output += f'<div class="card__title">{animal_info.get('name','Unknown')}</div>'
     output += '<p class="card__text">'
-    output += f"<strong>Diet:</strong> {animal_info['characteristics'].get('diet')}<br/>\n"
-    output += f"<strong>Location:</strong> {animal_info.get('locations'[0])}<br/>\n"
-    if animal_info["characteristics"].get("type"):
-        output += f"<strong>Type:</strong> {animal_info['characteristics'].get('type')}<br/>\n"
+    output += f"<strong>Diet:</strong> {animal_info['characteristics'].get('diet','Unknown')}<br/>\n"
+    output += f"<strong>Location:</strong> {animal_info.get('locations',['Unknown'])[0]}<br/>\n"
+    if animal_info["characteristics"].get("type","Unknown"):
+        output += f"<strong>Type:</strong> {animal_info['characteristics'].get('type','Unknown')}<br/>\n"
     output += "</p>\n"
     output += "</li>\n"
     return output
