@@ -7,9 +7,6 @@ def load_data(file_path):
     return json.load(handle)
 
 
-
-
-
 def serialize_animal(animal_info):
     """Return an HTML <li> card for a single animal"""
     output = ""
@@ -24,29 +21,28 @@ def serialize_animal(animal_info):
     output += "</li>\n"
     return output
 
+
 def generate_html(animals_data):
+    """Generates the complete HTML fragment for all animals."""
     output = ""
     for animal_info in animals_data:
         output += serialize_animal(animal_info)
     return output
 
 
-
-
 def write_html(output):
+    """Inserts the animal HTML into the template and writes the final HTML file."""
     with open("animals_template.html", "r") as file:
         template_html = file.read()
     final_html = template_html.replace("__REPLACE_ANIMALS_INFO__", output)
-    with open("animalsgettest.html", "w") as file:
+    with open("animals.html", "w") as file:
         file.write(final_html)
 
 
-
 def main():
+    """Main function that loads data, generates HTML, and writes the result."""
     animals_data = load_data('animals_data.json')
     write_html(generate_html(animals_data))
-
-
 
 
 if __name__ == "__main__":
